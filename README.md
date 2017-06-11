@@ -1,5 +1,19 @@
 # Seafile Pro Server
 
+## How to use
+
+```
+docker run \
+		-ti \
+		-v /docker-data/seafile:/data \
+		-e SERVER_NAME=TESTSERVER \
+		-e SERVER_IP=localhost.localdomain \
+		-e SEAFILE_ADMIN_MAIL=test@example.com \
+		-e SEAFILE_ADMIN_PASS=Temp12345 \
+		-e SERVER_IP=localhost.localdomain \
+		-p 80:80 \
+		dhswt/seafile:<tag>
+```
 
 ## Environment Variables
 `*Bold variables are required*`
@@ -8,6 +22,7 @@
 | --- | --- | --- |
 | DATA_DIR | "/data" | Location where data is stored. Should reside on a volume. Default volume is also "/data". |
 | SETUP_MODE | "auto" | How Seafile should be configured on first run. "auto" will use environment to configure the server. "manual" will require the user to exec into the container and run the setup script manually. |
+| DATABASE_TYPE | "sqlite" | Which database to use, supported options: "sqlite", "mysql". Note: MySQL requires additional MYSQL_* variables |
 | DB_PREFIX | "seafile_" | Database tables are prefixed with a unique identifier that groups them and allows multiple seafile installations with the same database. |
 | *SERVER_NAME* | none | *Required* The name of the seafile server |
 | *SERVER_IP* | none | *Required* The address which user use to reach the seafile server |
@@ -17,7 +32,6 @@
 | SEAFILE_GID | "1000" | The GID of the seafile user |
 | *SEAFILE_ADMIN_MAIL* | none | The initial seafile admin e-mail address |
 | *SEAFILE_ADMIN_PASS* | none | The initial seafile admin password, password is not updated after initial setup |
-
 
 ## TODO
 - gc cron job (if configured to use mysql, not supported for sqlite
