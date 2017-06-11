@@ -3,6 +3,7 @@
 
 ## Environment Variables
 `*Bold variables are required*`
+
 | Variable | Default | Description |
 | --- | --- | --- |
 | DATA_DIR | "/data" | Location where data is stored. Should reside on a volume. Default volume is also "/data". |
