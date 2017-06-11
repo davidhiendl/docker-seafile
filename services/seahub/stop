@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+
+cd $INSTALL_DIR
+exec /sbin/setuser seafile $SEAFILE_BIN/seahub.sh stop
