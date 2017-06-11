@@ -49,8 +49,11 @@ echo $POST_INSTALL_SCRIPTS > /etc/container_environment/POST_INSTALL_SCRIPTS
 # various
 echo "${SETUP_MODE:-auto}" > /etc/container_environment/SETUP_MODE
 echo "${NGINX_LISTEN_PORT:-80}" > /etc/container_environment/NGINX_LISTEN_PORT
-echo "${DATABASE_TYPE:-sqlite}" > /etc/container_environment/DATABASE_TYPE
 
+# database
+echo "${DATABASE_TYPE:-sqlite}" > /etc/container_environment/DATABASE_TYPE
+echo "${MYSQL_USER_HOST:-%}" > /etc/container_environment/MYSQL_USER_HOST
+echo "${MYSQL_USER:-seafile}" > /etc/container_environment/MYSQL_USER
 
 # support db prefix
 DB_PREFIX="${DB_PREFIX:-seafile_}"
