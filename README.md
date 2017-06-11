@@ -17,8 +17,6 @@ docker run \
 
 
 ## Environment Variables
-`__bold__ variables are required`
-
 
 | Variable | Default | Description |
 | --- | --- | --- |
@@ -34,8 +32,11 @@ docker run \
 | **SEAFILE_ADMIN_MAIL** | none | The initial seafile admin e-mail address |
 | **SEAFILE_ADMIN_PASS** | none | The initial seafile admin password, password is not updated after initial setup |
 
+__Bold variables are required__
 
-## Setup with MySQL and Databse Environment Variables
+
+
+## Setup with MySQL and Database Environment Variables
 This container supports non-interactive setup via environment variables.
 See <https://manual.seafile.com/deploy/using_mysql.html#setup-in-non-interactive-way> for reference.
 
@@ -72,8 +73,11 @@ docker run \
 	dhswt/seafile:<tag>
 ```
 
+
+
 ## TODO
 - gc cron job (if configured to use mysql, not supported for sqlite
 - configurable crontab for gc
 - optional memcached (enable via env variable) for increased performance
 - optional s3 storage backend
+- support upgrading seafile automatically
