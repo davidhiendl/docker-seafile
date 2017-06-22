@@ -3,8 +3,10 @@ set -e
 
 cd $SEAFILE_BIN
 
-# if already installed stop processing
+# if already installed create symlink and stop processing
 if [ $INSTALLED_VERSION != "NONE" ]; then
+	cd ${INSTALL_DIR}
+	ln -s seafile-pro-server-${SEAFILE_VERSION} seafile-server-latest
 	return 0
 fi
 
@@ -30,7 +32,7 @@ fi
 # print env
 echo "Running setup with following configuration:"
 echo "==========================================="
-printenv
+printenv | grep -v -E '^INITRD|^PWD|^LANG|^LC_|^OLDPWD|^TERM|^HOSTNAME|^DEBIAN_|^_|^SHLVL'
 echo "==========================================="
 
 # modify script to use credentials from env variables instead of asking for them
@@ -47,7 +49,21 @@ if [ $DATABASE_TYPE == "sqlite" ]; then
 	exec /sbin/setuser seafile $SEAFILE_BIN/setup-seafile.sh auto
 elif [ $DATABASE_TYPE == "mysql" ]; then
 	echo "mysql setup ..."
-	exec /sbin/setuser seafile $SEAFILE_BIN/setup-seafile-mysql.sh auto
+	exec /sbin/setuser seafile $SEAFILE_BIN/setup-seafile-mysql.sh auto \
+		-n "${SERVER_NAME}" \
+		-i "${SERVER_IP}" \
+		-d "${SEAFILE_DIR}" \
+		-e "0" \
+		-o "${MYSQL_HOST}" \
+		-t "${MYSQL_PORT}" \
+		-r "${MYSQL_ROOT_PASSWD}" \
+		-u "${MYSQL_USER}" \
+		-w "${MYSQL_USER_PASSWD}" \
+		-q "${MYSQL_USER_HOST}" \
+		-c "${CCNET_DB}" \
+		-s "${SEAFILE_DB}" \
+		-b "${SEAHUB_DB}"
+
 else
 	echo "Unsupported database type, supported types: [ mysql, sqlite ], was: ${DATABASE_TYPE}"
 	return 22

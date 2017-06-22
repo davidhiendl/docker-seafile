@@ -76,7 +76,7 @@ docker run \
 
 
 ## TODO
-- gc cron job (if configured to use mysql, not supported for sqlite
+- online gc cron job (if configured to use mysql, not supported for sqlite)
 - configurable crontab for gc
 - optional memcached (enable via env variable) for increased performance
 - optional s3 storage backend
