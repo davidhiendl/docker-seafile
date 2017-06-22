@@ -2,7 +2,7 @@ FROM		phusion/baseimage:0.9.22
 MAINTAINER	David Hiendl <david.hiendl@dhswt.de>
 
 ENV		INSTALL_DIR				/opt/seafile
-ENV		SEAFILE_VERSION			6.0.13
+ENV		SEAFILE_VERSION			6.1.1
 ENV		SEAFILE_DOWNLOAD_URL	"https://download.seafile.com/d/6e5297246c/files/?p=/pro/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz&dl=1"
 ENV		SEAFILE_UID				1000
 ENV		SEAFILE_GID				1000
@@ -57,7 +57,6 @@ RUN		mkdir -p $INSTALL_DIR \
 &&		wget -O seafile.tar.gz $SEAFILE_DOWNLOAD_URL \
 &&		tar xfz seafile.tar.gz \
 &&		rm seafile.tar.gz \
-&&		ln -s seafile-pro-server-${SEAFILE_VERSION} seafile-server-latest \
 
 # add user with consistent uid and gid
 &&		groupadd seafile \

@@ -1,10 +1,10 @@
 default: image
 
 docker-image = dhswt/seafile
-docker-tag = pro-6.0.13
+docker-tag = pro-6.1.1
 
 image:
-	docker build --squash \
+	docker build \
 		-t $(docker-image):$(docker-tag) \
 		.
 
