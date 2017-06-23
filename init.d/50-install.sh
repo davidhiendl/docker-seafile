@@ -7,7 +7,7 @@ cd $SEAFILE_BIN
 if [ $INSTALLED_VERSION != "NONE" ]; then
 	cd ${INSTALL_DIR}
 	ln -s seafile-pro-server-${SEAFILE_VERSION} seafile-server-latest
-	return 0
+	exit 0
 fi
 
 # Check if manual setup is desired
@@ -22,10 +22,10 @@ if [ $SETUP_MODE != "auto" ]; then
 
 	if [ -f /tmp/installed.flag ]; then
 		echo "Manual installation created installed.flag, continue startup"
-		return 0
+		exit 0
 	else
 		echo "Installation failed, missing file: ${SEAFILE_DIR}/installed.flag"
-		return 21
+		exit 21
 	fi	
 fi
 
@@ -66,5 +66,5 @@ elif [ $DATABASE_TYPE == "mysql" ]; then
 
 else
 	echo "Unsupported database type, supported types: [ mysql, sqlite ], was: ${DATABASE_TYPE}"
-	return 22
+	exit 22
 fi
