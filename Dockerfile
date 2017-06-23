@@ -75,10 +75,15 @@ RUN		mkdir -p $INSTALL_DIR \
 ADD		services	/etc/service
 ADD		init.d		/etc/my_init.d
 ADD		config		/config
+ADD		cron		/etc/cron.d
+ADD		bin			/usr/local/sbin
 
 # update permissions
 RUN		chmod 555 \
-		/etc/my_init.d/* \
-		/etc/service/seafile/* \
-		/etc/service/seahub/* \
-		/etc/service/nginx/*
+			/etc/my_init.d/* \
+			/usr/local/sbin/* \
+			/etc/service/seafile/* \
+			/etc/service/seahub/* \
+			/etc/service/nginx/* \
+&&		chmod 0644 \
+			/etc/cron.d/*

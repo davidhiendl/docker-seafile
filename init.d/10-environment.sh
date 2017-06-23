@@ -3,7 +3,7 @@ set -e
 
 
 # container debug
-CONTAINER_DEBUG=${CONTAINER_DEBUG:-0}
+CONTAINER_DEBUG="${CONTAINER_DEBUG:-0}"
 echo $CONTAINER_DEBUG > /etc/container_environment/CONTAINER_DEBUG
 
 # seafile binary dir
@@ -17,7 +17,6 @@ echo $DATA_DIR > /etc/container_environment/DATA_DIR
 # set SEAFILE_DIR, it used by seafile to store data
 SEAFILE_DIR=$INSTALL_DIR/seafile-data
 echo $SEAFILE_DIR > /etc/container_environment/SEAFILE_DIR
-
 
 # install version file
 INSTALLED_VERSION_FILE="${DATA_DIR}/version"
@@ -36,6 +35,9 @@ fi
 POST_INSTALL_SCRIPTS=0
 echo $POST_INSTALL_SCRIPTS > /etc/container_environment/POST_INSTALL_SCRIPTS
 
+# cron enable
+ENABLE_CRON_GC="${ENABLE_CRON_GC:-0}"
+echo $ENABLE_CRON_GC > /etc/container_environment/ENABLE_CRON_GC
 
 # user id
 #SEAFILE_UID="${SEAFILE_UID:-1000}"
@@ -58,26 +60,26 @@ if [ $DATABASE_TYPE == "mysql" ]; then
 	echo "${MYSQL_USER_HOST:-%}" > /etc/container_environment/MYSQL_USER_HOST
 	echo "${MYSQL_USER:-seafile}" > /etc/container_environment/MYSQL_USER
 	echo "${MYSQL_PORT:-3306}" > /etc/container_environment/MYSQL_PORT
-	
+
 	# support db prefix
 	DB_PREFIX="${DB_PREFIX:-seafile_}"
 	echo $DB_PREFIX > /etc/container_environment/DB_PREFIX
 	echo "${DB_PREFIX}${CCNET_DB:-ccnet}" > /etc/container_environment/CCNET_DB
 	echo "${DB_PREFIX}${SEAFILE_DB:-seafile}" > /etc/container_environment/SEAFILE_DB
 	echo "${DB_PREFIX}${SEAHUB_DB:-seahub}" > /etc/container_environment/SEAHUB_DB
-	
+
 	# require MYSQL_ROOT_PASSWD
 	[ -z "$MYSQL_ROOT_PASSWD" ] && echo "Variable MYSQL_ROOT_PASSWD is required" && exit 1;
 	echo ${MYSQL_ROOT_PASSWD} > /etc/container_environment/MYSQL_ROOT_PASSWD
-	
+
 	# require MYSQL_HOST
 	[ -z "$MYSQL_HOST" ] && echo "Variable MYSQL_HOST is required" && exit 1;
 	echo ${MYSQL_HOST} > /etc/container_environment/MYSQL_HOST
-	
+
 	# require MYSQL_USER_PASSWD
 	[ -z "$MYSQL_USER_PASSWD" ] && echo "Variable MYSQL_USER_PASSWD is required" && exit 1;
 	echo ${MYSQL_USER_PASSWD} > /etc/container_environment/MYSQL_USER_PASSWD
-	
+
 	# require MYSQL_ROOT_PASSWD
 	[ -z "$MYSQL_ROOT_PASSWD" ] && echo "Variable MYSQL_ROOT_PASSWD is required" && exit 1;
 	echo ${MYSQL_ROOT_PASSWD} > /etc/container_environment/MYSQL_ROOT_PASSWD
