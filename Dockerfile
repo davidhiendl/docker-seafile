@@ -1,8 +1,9 @@
-FROM    phusion/baseimage:0.9.22
+FROM    dhswt/phusion-baseimage:master
 LABEL   maintainer="David Hiendl <david.hiendl@dhswt.de>"
 
+# new version download: https://download.seafile.com/d/6e5297246c/?p=/pro
 ENV     INSTALL_DIR             /opt/seafile
-ENV     SEAFILE_VERSION         6.1.1
+ENV     SEAFILE_VERSION         6.2.4
 ENV     SEAFILE_DOWNLOAD_URL    "https://download.seafile.com/d/6e5297246c/files/?p=/pro/seafile-pro-server_${SEAFILE_VERSION}_x86-64.tar.gz&dl=1"
 ENV     SEAFILE_UID             1000
 ENV     SEAFILE_GID             1000

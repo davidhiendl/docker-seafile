@@ -1,10 +1,11 @@
 default: image
 
 docker-image = dhswt/seafile
-docker-tag = pro-6.1.1
+docker-tag = pro-6.2.4
 
 image:
 	docker build \
+		--squash \
 		-t $(docker-image):$(docker-tag) \
 		.
 
@@ -24,7 +25,7 @@ test-enter:
 		-p 80:80 \
 		--entrypoint bash \
 		$(docker-image):$(docker-tag)-test
-		
+
 test-run:
 	docker run \
 		-ti \
