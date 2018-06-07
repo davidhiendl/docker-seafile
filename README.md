@@ -1,3 +1,6 @@
+# moved to GitLab: https://gitlab.com/dhswt/docker/seafile
+
+
 # Dockerized Seafile Pro
 
 
